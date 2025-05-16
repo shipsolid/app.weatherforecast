@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "dob0xOgrpqs=",
+  "success": true,
+  "projectFilePath": "/home/amit/repos/amit-singh-7--dotnet--MicroservicesBasics-main/Play.Catalog/Play.Catalog.service/Play.Catalog.service.csproj",
+  "expectedPackageFiles": [
+    "/home/amit/.nuget/packages/microsoft.aspnetcore.openapi/9.0.0/microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
+    "/home/amit/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
