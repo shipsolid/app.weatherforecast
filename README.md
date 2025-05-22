@@ -4,7 +4,7 @@
 
 ```sh
 dotnet new webapi -n Play.Catalog.service
-dotnet new webapi -n Play.Catalog.service --framework net5.0
+dotnet new webapi -n WeatherForecast.service --framework net8.0
 
 
 
