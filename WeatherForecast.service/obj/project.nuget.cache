@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s5NEyFNJwBjoIHCJqizW0xk4vMqGP56eJVwwHHuIqzmO1fVX3d4/nrEOpsVfeTpnzafhmpWrLO1nfXBMJz3YTg==",
+  "dgSpecHash": "p+WEZC6/BKDBk9hkjVeCj5/HjmEuxghqDPieLvBfs8wpX6bfjrjyUVRKX7CQsV1kx4SVTHwGZMMmIWp73WjBjQ==",
   "success": true,
-  "projectFilePath": "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/WeatherForecast.service.csproj",
+  "projectFilePath": "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/WeatherForecast.service.csproj",
   "expectedPackageFiles": [
     "/home/amit/.nuget/packages/microsoft.aspnetcore.openapi/8.0.16/microsoft.aspnetcore.openapi.8.0.16.nupkg.sha512",
     "/home/amit/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

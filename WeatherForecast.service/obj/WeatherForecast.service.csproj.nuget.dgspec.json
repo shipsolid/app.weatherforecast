@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/WeatherForecast.service.csproj": {}
+    "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/WeatherForecast.service.csproj": {}
   },
   "projects": {
-    "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/WeatherForecast.service.csproj": {
+    "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/WeatherForecast.service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/WeatherForecast.service.csproj",
+        "projectUniqueName": "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/WeatherForecast.service.csproj",
         "projectName": "WeatherForecast.service",
-        "projectPath": "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/WeatherForecast.service.csproj",
+        "projectPath": "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/WeatherForecast.service.csproj",
         "packagesPath": "/home/amit/.nuget/packages/",
-        "outputPath": "/home/amit/repos/shipsolid--app.weatherforecast-main/WeatherForecast.service/obj/",
+        "outputPath": "/home/amit/repos/shipsolid--app.weatherforecast/WeatherForecast.service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/amit/.nuget/NuGet/NuGet.Config"
@@ -66,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/linuxbrew/.linuxbrew/Cellar/dotnet@8/8.0.16/libexec/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/linuxbrew/.linuxbrew/Cellar/dotnet@8/8.0.18/libexec/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

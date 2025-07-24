@@ -1,0 +1,68 @@
+## Build Results
+*/bin/
+*/obj/
+*/[Bb]uild/
+*/[Ll]og/
+*/TestResults/
+*/out/
+
+## User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+## Rider
+.idea/
+*.sln.iml
+
+## VS Code
+.vscode/
+*.code-workspace
+
+## OS Generated
+.DS_Store
+Thumbs.db
+
+## Package management
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+## Secrets / Configuration
+*/appsettings.*.json
+*/secrets.json
+*/.env
+*/.env.*
+
+## Docker artifacts
+*.tar
+*.img
+docker-compose.override.yml
+docker-compose.*.yml
+
+## Publish results
+*/publish/
+*/*.pubxml
+*/*.publishproj
+
+## Azure / Logs / Coverage
+*.azurepubxml
+*.coverage
+*.coveragexml
+*.log
+
+## Resharper
+_ReSharper*/
+*.DotSettings.user
+
+## Temporary files
+*.tmp
+*.bak
+*.old
+*.orig
+
+## Others
+*.pid
+*.lock.json
