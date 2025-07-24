@@ -1,10 +1,10 @@
 ## Build Results
-*/bin/
-*/obj/
-*/[Bb]uild/
-*/[Ll]og/
-*/TestResults/
-*/out/
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+TestResults/
+out/
 
 ## User-specific files
 *.user
@@ -31,10 +31,10 @@ packages/
 .nuget/
 
 ## Secrets / Configuration
-*/appsettings.*.json
-*/secrets.json
-*/.env
-*/.env.*
+appsettings.*.json
+secrets.json
+.env
+.env.*
 
 ## Docker artifacts
 *.tar
@@ -43,9 +43,9 @@ docker-compose.override.yml
 docker-compose.*.yml
 
 ## Publish results
-*/publish/
-*/*.pubxml
-*/*.publishproj
+publish/
+*.pubxml
+*.publishproj
 
 ## Azure / Logs / Coverage
 *.azurepubxml
