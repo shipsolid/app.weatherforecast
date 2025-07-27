@@ -107,7 +107,7 @@ jobs:
     - name: Run API
       run: |
         export ASPNETCORE_URLS="http://localhost:5101"
-        nohup dotnet run --no-build --configuration Release --project path/to/YourApi.csproj > app.log 2>&1 &
+        nohup dotnet run --no-build --configuration Release --project WeatherForecast.service.csproj > app.log 2>&1 &
         echo $! > app.pid
 
     # # Wait for readiness (up to 30s)
