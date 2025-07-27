@@ -79,19 +79,19 @@ jobs:
         # cache: true
 
     # # Cache NuGet packages
-    # - name: Cache NuGet packages
-    #   uses: actions/cache@v4
-    #   with:
-    #     # # Specifies the directory to cache. This is where NuGet stores downloaded packages globally.
-    #     path: ~/.nuget/packages
-    #     # # The key for the cache. It can include the OS and a hash of the packages.lock.json file to ensure cache is updated when dependencies change.
-    #     # # A unique identifier for the cache. If this key matches a previous run, the cache will be restored.
-    #     # # Hash of the packages.lock.json file. If this file changes (i.e., dependencies change), the key changes and a new cache will be created.
-    #     key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
-    #     # # Fallback keys to look for if the exact cache key isn’t found. Helps with partial matches and cache reuse.
-    #     # # This allows the cache to be reused across different runs, even if the exact key isn't found.
-    #     restore-keys: |
-    #       nuget-${{ runner.os }}-
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        # # Specifies the directory to cache. This is where NuGet stores downloaded packages globally.
+        path: ~/.nuget/packages
+        # # The key for the cache. It can include the OS and a hash of the packages.lock.json file to ensure cache is updated when dependencies change.
+        # # A unique identifier for the cache. If this key matches a previous run, the cache will be restored.
+        # # Hash of the packages.lock.json file. If this file changes (i.e., dependencies change), the key changes and a new cache will be created.
+        key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.lock.json') }}
+        # # Fallback keys to look for if the exact cache key isn’t found. Helps with partial matches and cache reuse.
+        # # This allows the cache to be reused across different runs, even if the exact key isn't found.
+        restore-keys: |
+          nuget-${{ runner.os }}-
 
     - name: Restore dependencies
       run: dotnet restore
