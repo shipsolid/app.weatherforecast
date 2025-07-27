@@ -78,7 +78,7 @@ jobs:
         # # prefer built‑in caching in actions/setup-dotnet
         # cache: true
 
-    # # prefer built‑in caching in actions/setup-dotnet
+    # # Cache NuGet packages
     # - name: Cache NuGet packages
     #   uses: actions/cache@v4
     #   with:
@@ -97,8 +97,42 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
       # working-directory: ./WeatherForecast.service
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    # # Start the app on http://localhost:5101 in background
+    - name: Run API
+      run: |
+        export ASPNETCORE_URLS="http://localhost:5101"
+        nohup dotnet run --no-build --configuration Release --project path/to/YourApi.csproj > app.log 2>&1 &
+        echo $! > app.pid
+
+    # # Wait for readiness (up to 30s)
+    - name: Wait for API
+      run: |
+        for i in {1..30}; do
+          if curl -sSf http://localhost:5101/weatherforecast > /dev/null; then
+            echo "API is up"; exit 0
+          fi
+          sleep 1
+        done
+        echo "API did not become ready"; echo "---- app.log ----"; tail -n +1 app.log
+        exit 1
+
+    # # Do assertions on the response
+    - name: Hit endpoint and assert
+      run: |
+        body=$(curl -sS http://localhost:5101/weatherforecast)
+        echo "$body"
+        # simple sanity check: ensure array with at least 1 item
+        test "$(echo "$body" | jq 'length >= 1')" = "true"
+
+    # # Always stop the app
+    - name: Stop API
+      if: always()
+      run: |
+        kill $(cat app.pid) || true
+        rm -f app.pid
