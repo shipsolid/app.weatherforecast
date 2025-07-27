@@ -17,6 +17,8 @@ dotnet dev-certs https --trust
 dotnet build
 dotnet run
 
+http://localhost:5101/weatherforecast
+
 https://127.0.0.1:7188/weatherforecast
 http://127.0.0.1:5214/weatherforecast
 ```
