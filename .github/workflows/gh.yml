@@ -1,0 +1,60 @@
+name: gh
+
+on:
+  push:
+    paths:
+      - ".github/workflows/gh.yml"
+  workflow_dispatch: # manual
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      # utility/debug pipeline
+      - uses: actions/checkout@v4
+      - run: env                          # Show environment variables
+      - run: echo "${{ toJson(github) }}" # Show GitHub context
+      - run: gh --version                 # Show GitHub CLI version
+      - run: gh auth status               # Check authentication status
+      - run: gh repo list --limit 5       # List repositories
+      - run: gh issue list --limit 5      # List issues
+      - run: gh workflow list --limit 5   # List workflows
+      - run: gh pr list --limit 5         # List pull requests
+      - run: gh release list --limit 5    # List releases
+      - run: gh api /repos/:owner/:repo                   # Get repository details
+      - run: gh api /repos/:owner/:repo/issues            # Get issues
+      - run: gh api /repos/:owner/:repo/pulls             # Get pull requests
+      - run: gh api /repos/:owner/:repo/releases          # Get releases
+      - run: gh api /repos/:owner/:repo/actions/workflows # Call GitHub REST API directly to list workflows
+      - run: gh api /repos/:owner/:repo/actions/runs      # Get action runs
+      - run: gh api /repos/:owner/:repo/actions/artifacts # Get action artifacts
+      - run: gh api /repos/:owner/:repo/commits           # Get commits
+      - run: gh api /repos/:owner/:repo/branches          # Get branches
+      - run: gh api /repos/:owner/:repo/collaborators     # Get collaborators
+      - run: gh api /repos/:owner/:repo/teams             # Get teams
+      - run: gh api /repos/:owner/:repo/labels            # Get labels
+
+      # 🧪 Test a real GitHub API call
+      - name: Get Open PR count via REST API
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/pulls \
+            | jq length
+
+      # 🛠️ Create an issue (dry-run mode)
+      - name: Test issue creation (dry-run)
+        run: echo "Would run gh issue create --title 'Sample' --body 'Created by GH CLI'"
+
+      # 📤 Upload Artifact of GH CLI Outputs
+      - name: Save gh outputs
+        run: |
+          gh repo view --json name,visibility > gh_output.json
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gh-cli-output
+          path: gh_output.json

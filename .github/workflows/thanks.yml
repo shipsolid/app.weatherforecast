@@ -12,12 +12,6 @@ jobs:
       issues: write # Allow writing comments on issues
 
     steps:
-      - name: Dump Github Context
-        run: echo "${{ toJson(github) }}"
-
-      - name: Dump Environment Variables
-        run: env
-
       - name: Check out the repository
         uses: actions/checkout@v4
 
