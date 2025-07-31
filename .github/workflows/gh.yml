@@ -33,7 +33,7 @@ jobs:
       - run: gh api /repos/:owner/:repo/commits           # Get commits
       - run: gh api /repos/:owner/:repo/branches          # Get branches
       - run: gh api /repos/:owner/:repo/collaborators     # Get collaborators
-      - run: gh api /repos/:owner/:repo/teams             # Get teams
+      # - run: gh api /repos/:owner/:repo/teams             # Get teams (GH_TOKEN: ${{ secrets.GH_PAT }})
       - run: gh api /repos/:owner/:repo/labels            # Get labels
 
       # 🧪 Test a real GitHub API call
