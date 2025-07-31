@@ -8,6 +8,8 @@ on:
 jobs:
   thanks:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write # Allow writing comments on issues
 
     steps:
       - name: Dump Github Context
