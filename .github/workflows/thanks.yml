@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           REPO: ${{ github.repository }}
-        run: python .github/scripts/thank.py
+        run: python .github/scripts/thanks.py
 
       - name: Output comment ID
         if: steps.issue_script.outputs.comment_id != ''
