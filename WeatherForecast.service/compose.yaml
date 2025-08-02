@@ -1,0 +1,13 @@
+services:
+  my-app:
+    build:
+      context: .
+      target: runner
+      platforms:
+        - linux/amd64
+      dockerfile: Dockerfile
+      args:
+        - MY_APP_VERSION
+    image: my-app
+    ports:
+      - "8080:80"

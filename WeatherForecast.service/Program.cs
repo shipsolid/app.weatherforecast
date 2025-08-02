@@ -1,4 +1,6 @@
 // Create the web application builder with command line arguments
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -40,6 +42,22 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast") // Set endpoint name for OpenAPI
 .WithOpenApi(); // Enable OpenAPI documentation for this endpoint
+
+var get_version = () => typeof(WeatherForecast).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+app.MapGet("/healthz", () =>
+{
+    return $"Healthy\n{get_version()}";
+});
+
+app.MapGet("/version", get_version);
+
+app.MapFallback(() =>
+{
+    // show version of app so each deploy is obvious
+    return $"Pick a real path!\n\tlike /weatherforecast\n\nVersion: {get_version()}";
+});
+
 
 // Start the web application and begin listening for requests
 app.Run();

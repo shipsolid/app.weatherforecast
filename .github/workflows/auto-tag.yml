@@ -1,4 +1,4 @@
-name: Auto Increment Tag
+name: Auto Increment Tag (TODO)
 
 on:
   workflow_dispatch: # manual
