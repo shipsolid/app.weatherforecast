@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: WeatherForecast.service api-build
+name: WeatherForecast.service
 
 on:
   # # Allows you to run this workflow manually from the Actions tab
@@ -15,6 +15,9 @@ on:
     #     description: 'Environment to deploy to'
     #     required: true
     #     default: 'staging'
+
+  # # Triggers the workflow on deployment events
+  # deployment:
 
   push:
     # # Triggers the workflow on push events to the main branch
@@ -170,3 +173,20 @@ jobs:
       # - name: Build and push
       #   run: |
       #     docker buildx build --push -t ghcr.io/${{ github.repository_owner }}/my-app:latest .
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: production
+  #     url: ${{ steps.deploy.outputs.webapp-url }}
+  #   needs: build
+  #   steps:
+  #     - uses: azure/login@v2
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #     - uses: azure/webapps-deploy@v3
+  #       id: deploy
+  #       with:
+  #         app-name: gh-actions-web-api
+  #         images: ghcr.io/shipsolid/my-app:latest
+  #         resource-group-name: gh-actions
