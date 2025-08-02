@@ -1,0 +1,64 @@
+# GitHub Actions workflow for integration testing with MySQL database
+name: integration-tests
+
+# Trigger conditions for this workflow
+on:
+  push:
+    # Only run when this specific workflow file is modified
+    paths:
+      - ".github/workflows/integration-tests.yml"
+  workflow_dispatch: # Allow manual triggering from GitHub UI
+
+jobs:
+  # Job 1: Generate a random password for MySQL authentication
+  generate:
+    runs-on: ubuntu-latest
+    # Make the generated password available to other jobs
+    outputs:
+      RANDOM_PASSWORD: ${{ env.RANDOM_PASSWORD }}
+
+    steps:
+      # Display current environment variables (before password generation)
+      - run: env | sort
+      # Generate a secure random 12-character password and store it in GITHUB_ENV
+      - run: echo "RANDOM_PASSWORD=$(LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 12)" >> "$GITHUB_ENV"
+      # Verify the password was generated and stored (shows both shell var and GitHub env var)
+      - run: echo "$RANDOM_PASSWORD / ${{ env.RANDOM_PASSWORD }}"
+      # Display all environment variables after password generation
+      # Display all environment variables after password generation
+      - run: env | sort
+
+  # Job 2: Run integration tests with MySQL database
+  testing:
+    needs: generate  # Wait for the generate job to complete first
+    runs-on: ubuntu-latest
+
+    # Run this job inside a MySQL container (acts as the main application container)
+    container:
+      image: mysql:8.4
+
+    steps:
+      # Verify the password is available from the previous job
+      - run: echo "${{ needs.generate.outputs.RANDOM_PASSWORD }}"
+      # Check MySQL client version available in the container
+      - run: mysql --version
+      # Test database connection using the generated password
+      # -h: hostname (service name), -u: username, -p: password (no space after -p)
+      - run: mysql -h mysqlserver -u root -p${{ needs.generate.outputs.RANDOM_PASSWORD }} -e "SHOW DATABASES;"
+      # Debug: Display information about available services in JSON format
+      - run: echo "job.services= ${{ toJson(job.services)}}"
+      # Debug: Display information about the job container in JSON format
+      - run: echo "job.container= ${{ toJson(job.container)}}"
+
+
+    # Additional service containers that run alongside the main container
+    services:
+      mysqlserver:  # Service name that can be used as hostname
+        image: mysql:8.4
+        env:
+          # Use the password generated in the previous job
+          MYSQL_ROOT_PASSWORD: ${{ needs.generate.outputs.RANDOM_PASSWORD }}
+          # Create a test database automatically
+          MYSQL_DATABASE: foothebar
+        # Health check to ensure MySQL is ready before running tests
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
