@@ -140,6 +140,9 @@ jobs:
   image:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      # # Permissions to write to the GitHub Container Registry
+      packages: write
 
     steps:
       - name: Checkout code
