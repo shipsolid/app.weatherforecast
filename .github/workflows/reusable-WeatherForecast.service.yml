@@ -1,0 +1,14 @@
+name: WeatherForecast.service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable-WeatherForecast.build.yml
+
+  deploy:
+    needs: build
+    uses: ./.github/workflows/reusable-WeatherForecast.deploy.yml
+    with:
+      package-name: WeatherForecast.service
