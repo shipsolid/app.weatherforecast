@@ -1,6 +1,4 @@
-[![upper-build](https://github.com/shipsolid/app.weatherforecast/actions/workflows/upper-build.yml/badge.svg?branch=main)](https://github.com/shipsolid/app.weatherforecast/actions/workflows/upper-build.yml)
-
-[![WeatherForecast.service](https://github.com/shipsolid/app.weatherforecast/actions/workflows/WeatherForecast.service.yml/badge.svg?branch=main)](https://github.com/shipsolid/app.weatherforecast/actions/workflows/WeatherForecast.service.yml)
+[![upper-build](https://github.com/shipsolid/app.weatherforecast/actions/workflows/upper-build.yml/badge.svg?branch=main)](https://github.com/shipsolid/app.weatherforecast/actions/workflows/upper-build.yml) [![WeatherForecast.service](https://github.com/shipsolid/app.weatherforecast/actions/workflows/WeatherForecast.service.yml/badge.svg?branch=main)](https://github.com/shipsolid/app.weatherforecast/actions/workflows/WeatherForecast.service.yml)
 
 # dotnet--MicroservicesBasics
 
