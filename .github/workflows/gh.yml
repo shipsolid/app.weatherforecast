@@ -6,6 +6,9 @@ on:
       - ".github/workflows/gh.yml"
   workflow_dispatch: # manual
 
+env:
+  WORKFLOW_VAR_1: "Workflow level variable"
+
 jobs:
   cli:
     runs-on: ubuntu-latest
@@ -58,3 +61,92 @@ jobs:
         with:
           name: gh-cli-output
           path: gh_output.json
+
+  Custom-Env-Variables:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: write value to $GITHUB_ENV file
+        run: echo "VAR_1=value set from first step" >> "$GITHUB_ENV"
+
+      - name: dispaly value of VAR_1
+        run: echo "Value of VAR_1 is $VAR_1"
+
+      - name: Set color
+        id: color-selector
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+      - name: Get color
+        env:
+          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+        run: echo "The selected color is $SELECTED_COLOR"
+
+  Linux-Runner-Job:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }} # Only run if on the main branch
+    
+    steps:
+      - run: env
+        
+      # print triggering event name
+
+      - name: Print Event (Runner Environment Variable)
+        run: echo "Trigger event is $GITHUB_EVENT_NAME"
+
+      - name: Print Event (Context Variable)
+        run: echo "Home directory is ${{ github.event_name }}"
+
+      - name: Conditional for pull requests
+        run: echo "This is being triggered from a pull request!"
+        if: ${{ github.event_name == 'pull_request' }} # Run only for pull requests
+        
+      # print home directory
+
+      - name: Print Home Directory (Runner Environment Variable)
+        run: echo "Home directory is $HOME"
+
+      - name: Print Home Directory (Context Variable)
+        run: echo "Home directory is ${{ runner.home }}"
+
+  Windows-Runner-Job:
+    runs-on: windows-latest
+    
+    steps:
+      - run: env
+
+      # print triggering event name
+
+      - name: Print Event (Runner Environment Variable)
+        run: echo "Trigger event is $env:GITHUB_EVENT_NAME"
+
+      - name: Print Event (Context Variable)
+        run: echo "Home directory is ${{ github.event_name }}"
+
+      # print home directory
+        
+      - name: Print Home Directory (Runner Environment Variable)
+        run: echo "Home directory is $env:USERPROFILE"
+      
+      - name: Print Home Directory (Context Variable)
+        run: echo "Home directory is ${{ runner.home }}"
+
+  Overwrite-Job-Variable:
+    runs-on: ubuntu-latest
+
+    # Job-level environment variables
+    env:
+      VAR_1: "Job level variable value"
+
+    steps:
+      - name: Display job-level variable
+        run: |
+          echo "VAR_1: $VAR_1"
+
+      - name: Override VAR_1 at step level
+        env:
+          VAR_1: "Step level variable value" # This will override the job-level VAR_1
+        run: |
+          echo "VAR_1: $VAR_1"
+
+      - name: Show VAR_1 value after step override
+        run: echo "Value of VAR_1 is $VAR_1"
