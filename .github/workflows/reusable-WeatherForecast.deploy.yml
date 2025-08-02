@@ -11,13 +11,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # environment:
-    #   name: debug
+    environment:
+      name: debug
 
     env:
       package-name: ${{ inputs.package-name }}
-      ACTIONS_STEP_DEBUG: true
-      ACTIONS_RUNNER_DEBUG: true
 
     steps:
       - name: Download artifact from build job
