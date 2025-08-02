@@ -86,7 +86,26 @@ jobs:
       run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}/app"
 
     - name: Upload Artifact
+      id: upload-artifact
       uses: actions/upload-artifact@v4
       with:
         name: WeatherForecast.service
         path: ${{env.DOTNET_ROOT}}/app
+
+    - name: Display output of upload-artifact
+      run: |
+        echo "The artifact-id is ${{ steps.upload-artifact.outputs.artifact-id }}"
+        echo "The artifact-url is ${{ steps.upload-artifact.outputs.artifact-url }}"
+      # shell: bash
+
+    # # Display output of upload-artifact in PowerShell
+    # - name: Display output of upload-artifact
+    #   run: |
+    #     Write-Output "The artifact-id is $env:artifactId"
+    #     Write-Output "The artifact-url is $env:artifactUrl"
+    #     Write-Output "The artifact-id is ${{ steps.upload-artifact.outputs.artifact-id }}"
+    #     Write-Output "The artifact-url is ${{ steps.upload-artifact.outputs.artifact-url }}"
+    #   shell: pwsh
+    #   env:
+    #     artifactId: ${{ steps.upload-artifact.outputs.artifact-id }}
+    #     artifactUrl: ${{ steps.upload-artifact.outputs.artifact-url }}
