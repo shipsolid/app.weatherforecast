@@ -184,19 +184,37 @@ jobs:
       #   run: |
       #     docker buildx build --push -t ghcr.io/${{ github.repository_owner }}/my-app:latest .
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: production
-  #     url: ${{ steps.deploy.outputs.webapp-url }}
-  #   needs: build
-  #   steps:
-  #     - uses: azure/login@v2
-  #       with:
-  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
-  #     - uses: azure/webapps-deploy@v3
-  #       id: deploy
-  #       with:
-  #         app-name: gh-actions-web-api
-  #         images: ghcr.io/shipsolid/my-app:latest
-  #         resource-group-name: gh-actions
+  deploy:
+    needs: image
+    runs-on: ubuntu-latest
+
+    env:
+      package-name: WeatherForecast.service
+
+    # environment:
+    #   name: production
+    #   url: ${{ steps.deploy.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: ${{ env.package-name }}
+
+
+      - name: Print name of App Service to deploy to
+        run: echo "App will be deployed to ${{ env.package-name }}"
+
+      - name: List files in root directory
+        run: ls -la
+
+      # - uses: azure/login@v2
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # - uses: azure/webapps-deploy@v3
+      #   id: deploy
+      #   with:
+      #     app-name: gh-actions-web-api
+      #     images: ghcr.io/shipsolid/my-app:latest
+      #     resource-group-name: gh-actions
