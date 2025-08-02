@@ -25,10 +25,10 @@ echo "📦 Target image: ${IMAGE_NAME}:${APP_VERSION}"
 # ---------------------
 # Docker Login (optional if done in workflow)
 # ---------------------
-if ! docker info | grep -q "$REGISTRY"; then
-  echo "🔐 Logging in to $REGISTRY"
-  echo "$GHCR_TOKEN" | docker login "$REGISTRY" -u "$OWNER" --password-stdin
-fi
+# if ! docker info | grep -q "$REGISTRY"; then
+#   echo "🔐 Logging in to $REGISTRY"
+#   echo "$GHCR_TOKEN" | docker login "$REGISTRY" -u "$OWNER" --password-stdin
+# fi
 
 # ---------------------
 # Build and Tag Docker Image
@@ -44,9 +44,9 @@ docker tag "$SERVICE_NAME" "${IMAGE_NAME}:latest"
 # ---------------------
 # Push Tags to GHCR
 # ---------------------
-# echo "🚀 Pushing tags to GHCR..."
-# docker push "${IMAGE_NAME}:${APP_VERSION}"
-# docker push "${IMAGE_NAME}:latest"
+echo "🚀 Pushing tags to GHCR..."
+docker push "${IMAGE_NAME}:${APP_VERSION}"
+docker push "${IMAGE_NAME}:latest"
 
 echo "✅ Done. Image pushed:"
 echo " - ${IMAGE_NAME}:${APP_VERSION}"
