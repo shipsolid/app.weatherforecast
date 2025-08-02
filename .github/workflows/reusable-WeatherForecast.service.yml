@@ -3,6 +3,10 @@ name: Reusable Workflow to Build & Deploy .NET App
 on:
   workflow_dispatch:
 
+env:
+  ACTIONS_STEP_DEBUG: true
+  ACTIONS_RUNNER_DEBUG: true
+
 jobs:
   build:
     uses: ./.github/workflows/reusable-WeatherForecast.build.yml
