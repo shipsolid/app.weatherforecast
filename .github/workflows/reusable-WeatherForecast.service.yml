@@ -1,4 +1,4 @@
-name: WeatherForecast.service
+name: Reusable Workflow to Build & Deploy .NET App
 
 on:
   workflow_dispatch:
