@@ -141,13 +141,13 @@ jobs:
         rm -f app.pid
 
     - name: Publish code
-      run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}\app"
+      run: dotnet publish -c Release --property:PublishDir="${{env.DOTNET_ROOT}}/app"
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: WeatherForecast.service
-        path: ${{env.DOTNET_ROOT}}\app
+        path: ${{env.DOTNET_ROOT}}/app
 
 
   image:
