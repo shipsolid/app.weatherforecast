@@ -5,6 +5,35 @@
 ## Play.Catalog
 
 ```sh
+download .NET SDK and Git CLI
+
+mkdir test3
+cd test3
+dotnet new webapp -n test3webapp -f net8.0
+cd test3webapp
+dotnet run
+follow link
+CTRL-C to stop
+
+
+git init -b main
+git add .
+git commit -m "First Commit"
+git remote add origin https://github.com/morrisseycode/test2.git
+git remote -v
+git push -u origin main
+
+create workflow
+- show templates
+use template - then cancel
+create blank workflow
+
+code .
+git branch
+git remote show origin
+git branch --set-upstream-to=origin/main
+
+
 dotnet new webapi -n Play.Catalog.service
 dotnet new webapi -n WeatherForecast.service --framework net8.0
 
